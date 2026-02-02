@@ -1,0 +1,111 @@
+Ans 1. -> Synchronous File Operations
+
+Block the execution until the operation completes
+ 
+Program waits for the file operation to finish
+
+Slower for large files
+
+Uses methods ending with Sync
+-> Asynchronous File Operations
+
+Non-blocking
+
+Program continues while file operation runs in background
+
+Faster and preferred in Node.js
+
+Uses callbacks, promises, or async/await
+
+Ans 2. Use file streams when:
+
+File size is very large
+
+You want better memory efficiency
+
+You are processing data piece by piece
+
+Handling audio, video, or log files
+
+Reason:
+Streams read data in chunks instead of loading the entire file into memory.
+
+Ans 3. Purpose of the 'utf8' Encoding Parameter
+
+Converts file data from binary buffer to readable text
+
+Without encoding, data is returned as a Buffer
+
+'utf8' is standard for text files
+
+Ans 4. Common File System Error Codes and Their Meanings
+Error Code          	Meaning
+ENOENT	          File or directory does not exist
+EACCES	          Permission denied
+EISDIR	          Path is a directory, not a file
+ENOTDIR	          Path is not a directory
+EMFILE	          Too many open files
+EBUSY	          File is busy or locked
+
+Ans 5. Using Node.js (Recommended)
+const fs = require('fs');
+
+fs.rm('myFolder', { recursive: true, force: true }, (err) => {
+  if (err) console.error(err);
+  else console.log('Directory deleted');
+});
+
+
+recursive: true → deletes all contents
+
+force: true → ignores errors if file doesn’t exist
+
+Ans 6. Piping
+
+Transfers data from one stream to another
+
+Automatically handles reading and writing
+
+Very efficient for large files
+
+Example:
+
+const fs = require('fs');
+
+const readStream = fs.createReadStream('input.txt');
+const writeStream = fs.createWriteStream('output.txt');
+
+readStream.pipe(writeStream);
+
+Ans 7. Prevents application crashes
+
+Helps identify missing files or permission issues
+
+Improves reliability and user experience
+
+Avoids data corruption
+
+Example:
+
+fs.readFile('data.txt', (err, data) => {
+  if (err) {
+    console.error('File error:', err.message);
+    return;
+  }
+  console.log(data.toString());
+});
+
+Ans 8. Difference Between writeFile and appendFile
+Method	                  Behavior
+writeFile	         Overwrites existing content
+appendFile	         Adds content at the end
+
+writeFile Example
+fs.writeFile('data.txt', 'Hello World', (err) => {
+  if (err) throw err;
+});
+
+appendFile Example
+fs.appendFile('data.txt', '\nNew Line', (err) => {
+  if (err) throw err;
+});
