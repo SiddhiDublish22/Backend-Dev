@@ -1,26 +1,18 @@
-const express = require("express");
-const app = express();
+import express from "express"
 
-app.use(express.json());
+const router = express.Router();
 
-const validateRegister = (req, res, next) => {
-  const { username, password } = req.body;
+let loginvalidation = (req,res,next)=>{
+  const token = req.query.token;
 
-  if (!username || !password) {
-    return res.status(400).json({
-      error: "Username and password are required",
-    });
+  if(token == "admin123"){
+    next();
   }
+  else{
+    return res.Send("Access Denied")
+  }
+}
 
-  next();
-};
-
-app.post("/register", validateRegister, (req, res) => {
-  res.json({
-    message: "Registration successful",
-  });
-});
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+router.get("/login,loginvalidation",(req,res)=>{
+  res.Send("login route")
+})
