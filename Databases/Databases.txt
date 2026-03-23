@@ -1,0 +1,58 @@
+1. Difference between SQL and NoSQL databases:
+
+SQL databases are relational and store data in tables with rows and columns. They use a fixed schema, meaning the structure must be defined before inserting data. Examples include MySQL and PostgreSQL. SQL uses structured query language (SQL) for operations and supports strong relationships using joins and foreign keys. It mainly scales vertically.
+
+NoSQL databases are non-relational and store data in flexible formats such as JSON documents, key-value pairs, or graphs. They have a dynamic schema, allowing data structure to change easily. Examples include MongoDB and Cassandra. NoSQL databases scale horizontally and are suitable for large and distributed data.
+
+Example:
+SQL: SELECT * FROM students WHERE gpa > 3.5;
+MongoDB: db.students.find({ gpa: { $gt: 3.5 } })
+
+
+2. CAP Theorem:
+The CAP theorem states that a distributed system can only guarantee two out of the following three properties:
+
+C - Consistency: All nodes see the same data at the same time.
+A - Availability: Every request receives a response.
+P - Partition Tolerance: The system continues to function even if network failures occur.
+
+A distributed system cannot guarantee all three because network failures (partitions) are unavoidable. During a partition, the system must choose between consistency and availability. If it ensures consistency, it may become unavailable, and if it ensures availability, data may become inconsistent.
+
+
+3. Scenarios where MongoDB is preferred:
+
+a) Flexible schema applications:
+When data structure is not fixed, such as user profiles with different fields.
+
+b) Large scale applications:
+Used in applications like social media where data is huge and needs horizontal scaling.
+
+c) Fast development with JSON data:
+Useful in Node.js applications and REST APIs because MongoDB stores data in JSON-like format.
+
+
+4. Why MongoDB uses BSON instead of JSON:
+MongoDB uses BSON (Binary JSON) internally instead of JSON because:
+
+- It is faster to read and write due to binary format.
+- It supports more data types such as Date, ObjectId, and Binary.
+- It is more efficient for storage and processing.
+
+BSON is an extended version of JSON optimized for performance.
+
+
+5. MongoDB Query:
+
+To find all students with GPA above 3.5 and enrolled in "CS101":
+
+db.students.find({
+  gpa: { $gt: 3.5 },
+  course: "CS101"
+})
+
+If courses are stored as an array:
+
+db.students.find({
+  gpa: { $gt: 3.5 },
+  courses: "CS101"
+})
