@@ -1,0 +1,7 @@
+{
+  "name": "multi-env-app",
+  "description": "Dev Staging Prod setup",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
